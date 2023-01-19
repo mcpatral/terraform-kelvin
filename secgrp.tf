@@ -69,6 +69,12 @@ resource "aws_security_group" "mcpatral-backend-sg" {
     to_port         = 0
     security_groups = [aws_security_group.mcpatral-prod-sg.id]
   }
+  ingress {
+    from_port       = 3306
+    protocol        = "tcp"
+    to_port         = 3306
+    security_groups = [aws_security_group.mcpatral-bastion-sg.id]
+  }
 }
 
 resource "aws_security_group_rule" "sec-group-allow-itself" {
